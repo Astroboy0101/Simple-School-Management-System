@@ -1,0 +1,9 @@
+[build]
+  base = "client"
+  publish = "dist/ssms-client/browser"
+  command = "npm install && npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
