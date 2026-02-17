@@ -1,0 +1,47 @@
+<div class="dashboard-container">
+    <div class="header">
+        <h1>Student Portal</h1>
+        <button mat-raised-button class="logout-btn" (click)="logout()">
+            <mat-icon style="margin-right: 5px;">exit_to_app</mat-icon> Logout
+        </button>
+    </div>
+
+    <mat-card>
+        <mat-card-header style="padding-bottom: 10px;">
+            <mat-card-title>My Performance Report</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table mat-table [dataSource]="marks" class="mat-elevation-z8">
+                <ng-container matColumnDef="subject">
+                    <th mat-header-cell *matHeaderCellDef> Subject </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div style="display: flex; align-items: center;">
+                            <mat-icon style="margin-right: 8px; color: var(--primary-color);">menu_book</mat-icon>
+                            {{element.subject?.name}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="marks">
+                    <th mat-header-cell *matHeaderCellDef> Marks </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="mark-score">{{element.marks}}</span> / 100
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="teacher">
+                    <th mat-header-cell *matHeaderCellDef> Teacher </th>
+                    <td mat-cell *matCellDef="let element"> {{element.teacher?.name}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div *ngIf="marks.length === 0" style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                <mat-icon style="font-size: 48px; height: 48px; width: 48px; opacity: 0.5;">assignment_late</mat-icon>
+                <p>No marks assigned yet.</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

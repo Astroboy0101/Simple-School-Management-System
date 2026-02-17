@@ -1,0 +1,71 @@
+<div class="dashboard-container">
+    <div class="header">
+        <h1>Teacher Portal</h1>
+        <button mat-raised-button class="logout-btn" (click)="logout()">
+            <mat-icon style="margin-right: 5px;">exit_to_app</mat-icon> Logout
+        </button>
+    </div>
+
+    <div class="content-grid">
+        <!-- Assign Marks Section -->
+        <mat-card>
+            <mat-card-header style="margin-bottom: 20px;">
+                <mat-card-title>Assign Marks</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="markForm" (ngSubmit)="onSubmit()" class="mark-form">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Student ID</mat-label>
+                        <input matInput formControlName="studentId" placeholder="Enter Student ID">
+                        <mat-icon matSuffix>badge</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Subject ID</mat-label>
+                        <input matInput formControlName="subjectId" placeholder="Enter Subject ID">
+                        <mat-icon matSuffix>menu_book</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Grade ID</mat-label>
+                        <input matInput formControlName="gradeId" placeholder="Enter Grade ID">
+                        <mat-icon matSuffix>class</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Marks</mat-label>
+                        <input matInput type="number" formControlName="marks" placeholder="0-100">
+                        <mat-icon matSuffix>grade</mat-icon>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="markForm.invalid"
+                        style="height: 45px; margin-top: 10px;">
+                        <mat-icon>save</mat-icon> Submit Mark
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- My Classes Section -->
+        <mat-card>
+            <mat-card-header style="margin-bottom: 20px;">
+                <mat-card-title>My Classes</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let grade of grades" class="class-list">
+                    <h3>{{grade.name}}</h3>
+                    <ul class="student-list">
+                        <li *ngFor="let student of grade.students">{{student.name}}</li>
+                        <li *ngIf="grade.students.length === 0"
+                            style="color: var(--text-secondary); font-style: italic;">No students assigned</li>
+                    </ul>
+                </div>
+                <div *ngIf="grades.length === 0"
+                    style="padding: 20px; text-align: center; color: var(--text-secondary);">
+                    <mat-icon style="font-size: 48px; height: 48px; width: 48px; opacity: 0.5;">school</mat-icon>
+                    <p>No classes assigned yet.</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

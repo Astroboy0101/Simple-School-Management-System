@@ -6,7 +6,9 @@ const bcrypt = require('bcryptjs');
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI)
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+mongoose.connect(process.env.MONGO_URI, clientOptions)
     .then(() => {
         console.log('MongoDB Connected');
         seedDB();
